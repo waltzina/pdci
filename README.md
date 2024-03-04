@@ -42,7 +42,7 @@ The DDPM model requires significant computational resources, and we have only bu
 
 Results with 200 epochs and 930K iterations, and the first 100 samples in [centering mask](https://drive.google.com/drive/folders/10zyHZtYV5vCht2MGNCF8WzpZJT2ae2RS?usp=sharing) and [irregular mask](https://drive.google.com/drive/folders/1vmSI-R9J2yQZY1cVkSSZlTYil2DprzvY?usp=sharing). 
 
-| ![Process_02323](img//figure1.jpg) |    ![Process_02323](misc//image//Process_26190.jpg)  |
+| ![Process_02323](img//fig1.jpg) |    ![Process_02323](misc//image//Process_26190.jpg)  |
 | ------------------------------------------------ | ---- |
 
 #### Places2 with 128×128 centering mask
