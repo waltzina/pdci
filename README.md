@@ -7,9 +7,15 @@
 
 Noninvasive optical imaging through dynamic scattering media has numerous important biomedical applications but still remains a challenging task. While standard diffuse imaging methods measure optical absorption or fluorescent emission, it is also well-established that the temporal correlation of scattered coherent light diffuses through tissue much like optical intensity. Few works to date, however, have aimed to experimentally measure and process such temporal correlation data to demonstrate deep-tissue video reconstruction of decorrelation dynamics. In this work, a single-photon avalanche diode array camera is utilized to simultaneously monitor the temporal dynamics of speckle fluctuations at the single-photon level from 12 different phantom tissue surface locations delivered via a customized fiber bundle array. Then a deep neural network is applied to convert the acquired single-photon measurements into video of scattering dynamics beneath rapidly decorrelating tissue phantoms. The ability to reconstruct images of transient (0.1–0.4 s) dynamic events occurring up to 8 mm beneath a decorrelating tissue phantom with millimeter-scale resolution is demonstrated, and it is highlighted how the model can flexibly extend to monitor flow speed within buried phantom vessels.
 
-![Flow diagram of proposed method for imaging temporal decorrelation dynamics. A) Illustration of parallelized diffuse correlation imaging (PaDI) measurement strategy. Scattered coherent light from source to multiple detector fibers travels through decorrelating scattering media along unique banana-shaped paths. Fully developed speckle on the tissue surface rapidly fluctuates as a function of deep-tissue movement. Green dashed box marks deep-tissue dynamics areas of interest for imaging. B) Computed autocorrelation curves from time-resolved measurements of surface speckle at different tissue surface locations. C) Autocorrelation variations caused by deep-tissue dynamics are computationally mapped into spatially resolved images of transient dynamics.](img//fig1.jpg)
 
-[Process_02323](img//fig1.jpg)
+
+<div class="row">
+    ![foo](img//fig1.jpg)
+</div>
+<div class="caption">
+    The experimental setup and results of the human prefrontal cortex activation test. (a) The schematic diagram of the experimental setup. (b) The plot of the decorrelation time values over the 15 min test including two reading stages and one intermediate rest stage, where 10 s of the signal is collected every minute. (c) The plot of mean decorrelation time corresponding to (b). Each mean decorrelation time value is obtained by averaging all the decorrelation time values within the corresponding 10 s window. (d) Mean ± SD results of the mean decorrelation time of 4 subjects calculated after dividing the data of each subject by the average decorrelation value of their respective measurement sequence. Solid horizontal lines represent the average of the five normalized decorrelation times in each stage {% cite liu2021fast %}.
+</div>
+
 
 ## Results
 
@@ -18,5 +24,4 @@ we tested the ability of PaDI to resolve decorrelation speed maps that vary as a
 We additionally conducted an experiment to study how our model, trained with data generated on our digital phantom, can reconstruct images of the dynamic scattering introduced by more biologically realistic contrast mechanisms. Noninvasive imaging of deep blood flow dynamics, such as hemodynamics within the human brain, is an important application for diffuse optical correlation-based measurements. Accordingly, we modeled deep hemodynamic flow by placing two capillary tubes (3 mm diameter) directly beneath a dynamic scattering volume (same optical properties: μa = 0.01 mm−1, 
 ) flowing at two different speeds (2.7 and 8.0 mm s−1) via syringe pump injection. After training an image formation model with PaDI data captured on our DMD-based phantom (630 maps of randomly oriented tube-like objects varying at 4–12 kHz, see Figure 6A), we acquired PaDI data from this unique capillary flow phantom and applied the DMD phantom-trained model to produce images as shown in Figure 6B. Here, we observe reconstructed image measurements of relative flow speed with spatial and temporal structures that match ground truth, pointing toward a system that can potentially image dynamic scattering beneath tissue in vivo using learning-based reconstruction methods trained with more easily accessible synthetic data.
 
-
-| ![Process_02323](img//fig1.jpg)  
+![foo](img//fig1.jpg)
