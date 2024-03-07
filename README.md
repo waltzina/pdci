@@ -3,38 +3,18 @@
 
 [Paper](https://doi.org/10.1002/advs.202201885)
 
-## Brief
+## Summary
 
 Noninvasive optical imaging through dynamic scattering media has numerous important biomedical applications but still remains a challenging task. While standard diffuse imaging methods measure optical absorption or fluorescent emission, it is also well-established that the temporal correlation of scattered coherent light diffuses through tissue much like optical intensity. Few works to date, however, have aimed to experimentally measure and process such temporal correlation data to demonstrate deep-tissue video reconstruction of decorrelation dynamics. In this work, a single-photon avalanche diode array camera is utilized to simultaneously monitor the temporal dynamics of speckle fluctuations at the single-photon level from 12 different phantom tissue surface locations delivered via a customized fiber bundle array. Then a deep neural network is applied to convert the acquired single-photon measurements into video of scattering dynamics beneath rapidly decorrelating tissue phantoms. The ability to reconstruct images of transient (0.1–0.4 s) dynamic events occurring up to 8 mm beneath a decorrelating tissue phantom with millimeter-scale resolution is demonstrated, and it is highlighted how the model can flexibly extend to monitor flow speed within buried phantom vessels.
 
-
-## Status
-
-### Code
-- [x] Diffusion Model Pipeline
-- [x] Train/Test Process
-- [x] Save/Load Training State
-- [x] Logger/Tensorboard
-- [x] Multiple GPU Training (DDP)
-- [x] EMA
-- [x] Metrics (now for FID, IS)
-- [x] Dataset (now for inpainting, uncropping, colorization)
-- [x] Google colab script 🌟(now for inpainting)
-
-### Task
-
-I try to finish following tasks in order:
-- [x] Inpainting on [CelebaHQ](https://drive.google.com/drive/folders/1CjZAajyf-jIknskoTQ4CGvVkAigkhNWA?usp=sharing)🚀 ([Google Colab](https://colab.research.google.com/drive/1wfcd6QKkN2AqZDGFKZLyGKAoI5xcXUgO#scrollTo=8VFpuekybeQK))
-- [x] Inpainting on [Places2 with 128×128 centering mask](https://drive.google.com/drive/folders/1fLyFtrStfEtyrqwI0N_Xb_3idsf0gz0M?usp=sharing)🚀
-
-The follow-up experiment is uncertain, due to lack of time and GPU resources:
-
-- [ ] Uncropping on Places2
-- [ ] Colorization on ImageNet val set 
+[Flow diagram of proposed method for imaging temporal decorrelation dynamics. A) Illustration of parallelized diffuse correlation imaging (PaDI) measurement strategy. Scattered coherent light from source to multiple detector fibers travels through decorrelating scattering media along unique banana-shaped paths. Fully developed speckle on the tissue surface rapidly fluctuates as a function of deep-tissue movement. Green dashed box marks deep-tissue dynamics areas of interest for imaging. B) Computed autocorrelation curves from time-resolved measurements of surface speckle at different tissue surface locations. C) Autocorrelation variations caused by deep-tissue dynamics are computationally mapped into spatially resolved images of transient dynamics.](img//fig1.jpg)
 
 ## Results
 
-The DDPM model requires significant computational resources, and we have only built a few example models to validate the ideas in this paper.
+we tested the ability of PaDI to resolve decorrelation speed maps that vary as a function of space and at different phantom tissue depths. PaDI reconstructions for two variable-speed perturbations under both 5 and 8 mm of turbid medium are in Figure 5C. In this experiment, 1280 and 108 patterns of variable speed and shape were utilized for training and testing, respectively. First, we observe that PaDI can spatially resolve features while still maintaining an accurate measure of unique decorrelation speeds. When structures with different decorrelation speeds begin to spatially overlap, the associated reconstructed speed values close to the overlap boundary are either lifted or lowered toward that of the neighboring structure. This is expected, as the detected light travelling through the “banana-shaped” light path contains information integrated over a finite-sized sensitivity region that will effectively limit the spatial resolution of the associated speed map reconstruction. Moreover, we also observed that PaDI reconstructions of dynamics hidden beneath a thicker 8 mm scattering medium are less accurate than those for dynamics beneath a 5 mm scattering medium. A resolution analysis based on the contrast in the edge regions of the circles, and the width of 10–90% edge response is also provided in Figure 5E. Speckle fluctuations sampled by our current configuration on the phantom tissue surface are less sensitive to decorrelation events occurring within deeper region. Creating a PaDI probe with larger source-detector separations can help address this challenge, as detailed in the Section 2.4. Further, we collect continuous data for 3 s, where the dynamic patterns hidden underneath present for 0.3 s, and change every 0.5 s. We show reconstructions of a few frames at Figure 5D. Figure 5F plots four of decorrelation rates change in time. The decorrelation rates are extracted by fitting each autocorrelation curves (using a Levenberg–Marquardt algorithm) with 1 + βeγτ, where τ is delay-time and γ is the decorrelation rates. These autocorrelation curves are used to generate reconstructions in Figure 5D. 3 s continuous measurements are taken, and the curves are estimated using 0.3 s integration window and 66.7% overlap between sliding windows. A set of autocorrelation curves from these four-fiber detection at 1.4 s is presented on the right. 
+
+We additionally conducted an experiment to study how our model, trained with data generated on our digital phantom, can reconstruct images of the dynamic scattering introduced by more biologically realistic contrast mechanisms. Noninvasive imaging of deep blood flow dynamics, such as hemodynamics within the human brain, is an important application for diffuse optical correlation-based measurements. Accordingly, we modeled deep hemodynamic flow by placing two capillary tubes (3 mm diameter) directly beneath a dynamic scattering volume (same optical properties: μa = 0.01 mm−1, 
+) flowing at two different speeds (2.7 and 8.0 mm s−1) via syringe pump injection. After training an image formation model with PaDI data captured on our DMD-based phantom (630 maps of randomly oriented tube-like objects varying at 4–12 kHz, see Figure 6A), we acquired PaDI data from this unique capillary flow phantom and applied the DMD phantom-trained model to produce images as shown in Figure 6B. Here, we observe reconstructed image measurements of relative flow speed with spatial and temporal structures that match ground truth, pointing toward a system that can potentially image dynamic scattering beneath tissue in vivo using learning-based reconstruction methods trained with more easily accessible synthetic data.
 
 ### Visuals
 
