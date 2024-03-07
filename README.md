@@ -22,4 +22,4 @@ We additionally conducted an experiment to study how our model, trained with dat
 
 #### Celeba-HQ
 [Process_02323](img//fig1.jpg)
-
+| ![Process_02323](img//fig1.jpg) |   
