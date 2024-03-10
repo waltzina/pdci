@@ -1,4 +1,4 @@
-## Imaging Dynamics Beneath Turbid Media via Parallelized Single-Photon Detection
+### Imaging Dynamics Beneath Turbid Media via Parallelized Single-Photon Detection
 
 [Paper](https://doi.org/10.1002/advs.202201885)
 
